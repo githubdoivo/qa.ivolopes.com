@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- csp-meta: only this site's own scripts run (refresh with ~/bin/csp-meta after editing an inline script) -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Xq+9Sda6K3fVRITrc4UfTanAlYB9QEobkrm9zKTtULw=' 'sha256-eVStZG/tEU+f6/m8s0fDk60ZH8NF4Q+oxIhaToO0wrA=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; media-src 'self' data: blob:; connect-src 'self' https://cloudflareinsights.com; frame-src 'none'; worker-src 'self' blob:; object-src 'none'; base-uri 'self'; form-action 'self'">
   <title>Fixing a Flaky CI Suite · Ivo Lopes</title>
   <meta name="description" content="How a red CI that everyone had learnt to ignore got fixed: measuring instead of assuming, and treating every flaky test as a timing assumption to find, not noise to retry.">
   <meta property="og:title" content="Fixing a Flaky CI Suite · Ivo Lopes">
