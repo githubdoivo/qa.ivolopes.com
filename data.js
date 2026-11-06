@@ -82,10 +82,10 @@ window.CV = {
 
   projects: [
     {
-      name: "appdoivo",
-      href: "https://github.com/githubdoivo/festa-app",
-      demo: "https://festa-demo.appdoivo.com",
-      tests: "https://github.com/githubdoivo/festa-app-e2e",
+      name: "Lodge",
+      href: "https://github.com/githubdoivo/lodge-app",
+      demo: "https://lodge-demo.appdoivo.com",
+      tests: "https://github.com/githubdoivo/lodge-app-e2e",
       story: "writing/flaky-ci.html",
       kind: "Side project · PWA used by ~50 guests at a real event",
       blurb: "A party app built and tested the way I'd want a production system to be: quality gates first, then features.",
