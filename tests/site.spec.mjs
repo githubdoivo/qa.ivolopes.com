@@ -278,3 +278,26 @@ test("on a phone, buttons and links outside running text are at least 44px tall"
     expect(small, url).toEqual([]);
   }
 });
+
+test("phone frame: the window rests 160px down on phones, wallpaper past both edges, title bar sticks at the top", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "phones only; the desktop layout is unchanged");
+  await page.goto("/");
+  await page.waitForFunction(() => Math.abs(window.scrollY - 160) < 1);
+  const r = await page.evaluate(async () => {
+    const pg = document.getElementById("page"); pg.scrollTo(0, 900); await new Promise((res) => setTimeout(res, 100));
+    const bg = document.querySelector(".bg").getBoundingClientRect(), tb = document.querySelector(".titlebar").getBoundingClientRect();
+    const pinned = [...document.querySelectorAll("body *")].filter((e) => getComputedStyle(e).position === "fixed" && e.offsetParent !== null && !e.closest("[hidden]")).map((e) => e.className);
+    return { top: bg.top, bottom: bg.bottom, ih: innerHeight, tbTop: tb.top, pinned };
+  });
+  expect(r.pinned).toEqual([]);
+  expect(r.top).toBeLessThanOrEqual(-159);
+  expect(r.bottom).toBeGreaterThanOrEqual(r.ih);
+  expect(Math.abs(r.tbTop)).toBeLessThan(1);
+});
+
+test("desktop: the window is not moved by the phone frame", async ({ page, isMobile }) => {
+  test.skip(isMobile, "desktop only");
+  await page.goto("/");
+  await page.waitForTimeout(300);
+  expect(await page.evaluate(() => window.scrollY)).toBe(0);
+});

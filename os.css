@@ -338,7 +338,7 @@ a.company:hover { text-decoration: underline; }
   .toolbar { overflow-x: auto; }
   .tool { min-width: 52px; }
   .win-body { display: block; position: relative; }
-  .side { display: none; position: fixed; top: 40px; left: 0; right: 0; z-index: 7; flex-direction: row; flex-wrap: wrap; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
+  .side { display: none; position: sticky; top: 40px; left: 0; right: 0; z-index: 7; flex-direction: row; flex-wrap: wrap; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,.4); }
   .side a { width: 30%; }
   .window.side-open .side { display: flex; }
   .content { overflow: visible; padding: 8px; }
@@ -402,3 +402,23 @@ a.company:hover { text-decoration: underline; }
   .more, .checks-link { padding-block: 13px; min-height: 44px; }
   .tb-menu { min-width: 44px; min-height: 40px; }
 }
+
+/* Phone frame, same as ivolopes.com (phones only; wider screens keep the desktop as it was).
+   iPhone Safari paints a solid band over layers pinned to the screen edges, so on phones the
+   window never scrolls: the wallpaper (.bg) holds still and reaches 160px above the screen
+   (frame.js keeps the window there, so the clock sits on it) and past the bottom bar; only
+   #page scrolls, and the title and status bars stick inside it (sticky offsets count from
+   inside #page's padding, so they stay 0). */
+:root { --above: 0px; --below: 0px; }
+.bg { display: none; }
+.page { display: contents; }
+@media (max-width: 760px) {
+  :root { --above: 160px; }
+  html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+  body { background: #5b8fc9; }
+  .bg, .page { display: block; position: absolute; top: 0; left: 0; right: 0; height: calc(100vh + var(--above) + var(--below)); height: calc(100lvh + var(--above) + var(--below)); }
+  .bg { z-index: 0; background: #5b8fc9 url(os/wallpaper.webp) center 40% / cover no-repeat; }
+  .page { z-index: 1; padding-top: var(--above); padding-bottom: calc(100lvh - 100svh + var(--below)); overflow-x: hidden; overflow-y: auto; overscroll-behavior: none; }
+  .window, .window.maximized { min-height: 100svh; overflow: clip; }   /* clip, not hidden: lets the title and status bars stick */
+}
+@media (max-width: 760px) and (pointer: coarse) { :root { --below: 120px; } }

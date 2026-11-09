@@ -30,10 +30,12 @@
   <meta name="color-scheme" content="only light">
   <meta name="darkreader-lock">
   <link rel="preload" as="image" href="os/wallpaper.webp">
-  <link rel="stylesheet" href="os.css?v=20261029b">
+  <link rel="stylesheet" href="os.css?v=20261109a">
   <link rel="stylesheet" href="paper.css?v=20261027c">
 </head>
 <body>
+<div class="bg" aria-hidden="true"></div>
+<div class="page" id="page">
   <!-- ===== Web view: an imaginary 2000s desktop running the "Test Runner" ===== -->
   <main id="web" class="view desktop">
     <nav class="desk-icons" aria-label="Desktop">
@@ -216,6 +218,8 @@
     </div>
   </main>
 
+</div>
+
   <script src="data.js?v=20261029a"></script>
   <script src="data.pt.js?v=20261030a"></script>
   <script src="app.js?v=20261027d"></script>
@@ -231,5 +235,6 @@
       document.head.appendChild(cf);
     }
   </script>
+  <script src="frame.js?v=1"></script>
 </body>
 </html>

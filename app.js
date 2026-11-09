@@ -456,6 +456,7 @@
     $("#paper").hidden = !paper;
     if (paper) { fitText(); fitSheet(); }
     if (push) history.replaceState(null, "", paper ? "#cv" : location.pathname);
+    const page = document.getElementById("page"); if (page) page.scrollTo(0, 0);   // phones: #page scrolls
     window.scrollTo(0, 0);
   }
   document.querySelectorAll("[data-view]").forEach((b) => b.addEventListener("click", () => setView(b.dataset.view, true)));
